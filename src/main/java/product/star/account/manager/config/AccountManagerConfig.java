@@ -8,15 +8,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import product.star.account.manager.AccountDao;
-import product.star.account.manager.AccountService;
-import product.star.account.manager.BlocklistResolver;
 import product.star.account.manager.InMemoryAccountDao;
 import product.star.account.manager.InMemoryAccountService;
 import product.star.account.manager.InMemoryBlocklistResolver;
-import product.star.account.manager.InMemoryPhoneToAccountResolver;
 import product.star.account.manager.PhoneToAccountResolver;
 import product.star.contact.manager.ContactDao;
 import product.star.contact.manager.ContactDaoImpl;
+import product.star.account.manager.AccountService;
+import product.star.account.manager.BlocklistResolver;
+import product.star.account.manager.InMemoryPhoneToAccountResolver;
 
 import javax.sql.DataSource;
 import java.util.Set;
