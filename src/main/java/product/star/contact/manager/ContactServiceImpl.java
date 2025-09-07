@@ -1,7 +1,6 @@
 package product.star.contact.manager;
 
 
-
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -20,31 +19,39 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Contact> getAllContacts() {
-        return contactDao.getAllContacts();
+        return contactDao.findAll();
     }
 
     @Override
     public Optional<Contact> getContactById(Long id) {
-        return contactDao.getContactById(id);
+        return Optional.empty();
     }
 
     @Override
     public Contact addContact(Contact contact) {
-        return contactDao.addContact(contact);
+
+        return contactDao.save(contact);
     }
 
     @Override
     public void updatePhoneNumber(Long id, String phoneNumber) {
-        contactDao.updatePhoneNumber(id, phoneNumber);
+        contactDao.findById(id).ifPresent(contact -> {
+            contact.setPhoneNumber(phoneNumber);
+            contactDao.save(contact);
+        });
     }
 
     @Override
     public void updateEmail(Long id, String email) {
-        contactDao.updateEmail(id, email);
+        contactDao.findById(id).ifPresent(contact -> {
+            contact.setEmail(email);
+            contactDao.save(contact);
+        });
     }
 
     @Override
     public void deleteContact(Long id) {
-        contactDao.deleteContactById(id);
+
+        contactDao.deleteById(id);
     }
 }

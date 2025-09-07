@@ -19,7 +19,7 @@ services:
     depends_on:
       - postgres-database
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-database:5432/mydatabase
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/mydatabase
       SPRING_DATASOURCE_USERNAME: postgres_database
       SPRING_DATASOURCE_PASSWORD: postgres_database
     ports:
