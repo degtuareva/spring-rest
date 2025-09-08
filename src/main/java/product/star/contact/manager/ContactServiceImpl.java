@@ -1,9 +1,7 @@
 package product.star.contact.manager;
 
-
-
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,39 +10,45 @@ import java.util.Optional;
 @Transactional
 public class ContactServiceImpl implements ContactService {
 
-    private final ContactDao contactDao;
+    private final ContactRepository contactRepository;
 
-    public ContactServiceImpl(ContactDao contactDao) {
-        this.contactDao = contactDao;
+    public ContactServiceImpl(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
     }
 
     @Override
     public List<Contact> getAllContacts() {
-        return contactDao.getAllContacts();
+        return contactRepository.findAll();
     }
 
     @Override
     public Optional<Contact> getContactById(Long id) {
-        return contactDao.getContactById(id);
+        return contactRepository.findById(id);
     }
 
     @Override
     public Contact addContact(Contact contact) {
-        return contactDao.addContact(contact);
+        return contactRepository.save(contact);
     }
 
     @Override
     public void updatePhoneNumber(Long id, String phoneNumber) {
-        contactDao.updatePhoneNumber(id, phoneNumber);
+        contactRepository.findById(id).ifPresent(contact -> {
+            contact.setPhoneNumber(phoneNumber);
+            contactRepository.save(contact);
+        });
     }
 
     @Override
     public void updateEmail(Long id, String email) {
-        contactDao.updateEmail(id, email);
+        contactRepository.findById(id).ifPresent(contact -> {
+            contact.setEmail(email);
+            contactRepository.save(contact);
+        });
     }
 
     @Override
     public void deleteContact(Long id) {
-        contactDao.deleteContactById(id);
+        contactRepository.deleteById(id);
     }
 }

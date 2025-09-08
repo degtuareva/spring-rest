@@ -42,6 +42,4 @@ public class AccountController {
     ) {
         return accountFacade.transfer(transactionDto);
     }
-
-
 }
