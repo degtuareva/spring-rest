@@ -1,17 +1,14 @@
 package product.star.contact.manager;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Entity
 @Table(name = "contacts")
 public class Contact {
+
+    private static final Logger logger = LoggerFactory.getLogger(Contact.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,25 +26,28 @@ public class Contact {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    public Contact() {}
+    public Contact() {
+        logger.info("Contact entity created");
+    }
 
     public Contact(String firstName, String lastName, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        logger.info("Contact created: {} {}, phone {}, email {}", firstName, lastName, phoneNumber, email);
     }
 
     public Long getId() {
         return id;
     }
 
-    // Геттеры и сеттеры
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
+        logger.debug("Set firstName to {}", firstName);
         this.firstName = firstName;
     }
 
@@ -56,6 +56,7 @@ public class Contact {
     }
 
     public void setLastName(String lastName) {
+        logger.debug("Set lastName to {}", lastName);
         this.lastName = lastName;
     }
 
@@ -64,6 +65,7 @@ public class Contact {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        logger.debug("Set phoneNumber to {}", phoneNumber);
         this.phoneNumber = phoneNumber;
     }
 
@@ -72,6 +74,7 @@ public class Contact {
     }
 
     public void setEmail(String email) {
+        logger.debug("Set email to {}", email);
         this.email = email;
     }
 }

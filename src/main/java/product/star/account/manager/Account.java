@@ -1,6 +1,12 @@
 package product.star.account.manager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Account {
+
+    private static final Logger logger = LoggerFactory.getLogger(Account.class);
+
 
     private final long id;
     private long amount;
@@ -8,6 +14,7 @@ public class Account {
     public Account(long id, long amount) {
         this.id = id;
         this.amount = amount;
+        logger.info("Account created with id {}, amount {}", id, amount);
     }
 
     public long getId() {
@@ -19,7 +26,8 @@ public class Account {
     }
 
     public void setAmount(long amount) {
-        this.amount = amount;
+
+        logger.debug("Setting amount {} for account id {}", amount, id);this.amount = amount;
     }
 
     @Override
